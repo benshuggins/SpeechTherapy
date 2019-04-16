@@ -43,5 +43,9 @@
 	</array>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Can this app use the microphone?</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Can App convert your Speech to text?</string>
 </dict>
 </plist>

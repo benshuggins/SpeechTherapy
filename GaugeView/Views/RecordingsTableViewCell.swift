@@ -4,7 +4,9 @@
 //
 //  Created by Ben Huggins on 4/6/19.
 //  Copyright © 2019 User. All rights reserved.
-// ben git is working
+
+
+// add score to the cell 
 
 import UIKit
 
@@ -22,21 +24,18 @@ class RecordingsTableViewCell: UITableViewCell {
         }
     }
     
-    
+    @IBOutlet weak var passFailLabel: UILabel!
+    @IBOutlet weak var speechTextLabel: UILabel!
     @IBOutlet weak var playRecordingButtonLabel: UIButton!
     @IBOutlet weak var startExerciseButtonLabel: UIButton!
     @IBOutlet weak var recordingNameLabel: UILabel!
     @IBOutlet weak var dBLabel: UILabel!
-    @IBOutlet weak var speechTextLabel: UILabel!  // future
-    @IBOutlet weak var volumeSlider: UISlider!   //future
-    
     
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
     }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
    
@@ -58,8 +57,7 @@ class RecordingsTableViewCell: UITableViewCell {
         dBLabel.text = "\(roundeddBMeasure)"
        
        // print("🧐\(String(describing: volumeSlider))")
-        delegate?.sliderChangeMoved(self, volumeSlider)
-        
+       // delegate?.sliderChangeMoved(self, volumeSlider)
     
     }
     
@@ -82,6 +80,8 @@ class RecordingsTableViewCell: UITableViewCell {
         
         dBLabel.text = "dB: \(record.decibels + updatedValue) dB"
         
+        speechTextLabel.text = record.sst
+        passFailLabel.text = record.score
         
     }
 
