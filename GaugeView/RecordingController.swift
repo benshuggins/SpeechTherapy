@@ -10,7 +10,7 @@ import Foundation
 class RecordingController {
     
     func addScore(_ score: Score, to recording: Recordings) {
-        recording.score = score
+      //  recording.score = score
         
         // save
     }

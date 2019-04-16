@@ -24,10 +24,10 @@ class GaugeView: UIView {
     @IBInspectable var outerBezelColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
     var outerBezelWidth: CGFloat = 10
     
-    var innerBezelColor = UIColor.white
+    var innerBezelColor = UIColor.blue
     var innerBezelWidth: CGFloat = 5
     
-    var insideColor = UIColor.white
+    var insideColor = UIColor.gray
     
     //MARK: - Angle of gauge bezels
     var totalAngle: CGFloat = 270
