@@ -30,17 +30,16 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     var isTimerRunning = false
     
     var scoreAnswer: String = "" // pass fail
-    
     var STT: String = ""
     var roundedAvgDB: Double = 0
-    var numberOfRecords: Int = 0
+    var numberOfRecords: Double = 0
     
     
     //SOT
     var recordings: [Recordings] = []
     
     // SOT for core data 
-    var recorings: [Entry] = []
+    var entries: [Entry] = []
     
     @IBOutlet weak var buttonLabel: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
@@ -61,9 +60,9 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     
     
     //MARK: - Decibel Labels
-//    @IBOutlet weak var dBLabel: UILabel!
-//    @IBOutlet weak var normLabel: UILabel!
-//    @IBOutlet weak var avgLabel: UILabel!
+    //    @IBOutlet weak var dBLabel: UILabel!
+    //    @IBOutlet weak var normLabel: UILabel!
+    //    @IBOutlet weak var avgLabel: UILabel!
     
     //MARK: - AV Setup
     
@@ -87,9 +86,7 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      test.backgroundColor = .gray
-       
-        
+        test.backgroundColor = .gray
         
         self.view.backgroundColor = .white
         //MARK: - TextToSpeech segment control
@@ -124,7 +121,7 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         }
         
         
-   //MARK: - AVAudioSession
+        //MARK: - AVAudioSession
         
         recordingSession = AVAudioSession.sharedInstance()
         
@@ -142,10 +139,17 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         do {
-            entries = try context.fetch(Entry.fetchRequest())
+            entries = try context.fetch(Entry.fetchRequest()) // SOT core data
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+        
+        print(context.registeredObjects.count)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        recordTableView.reloadData()
     }
     
     //MARK: - countdown timer
@@ -153,9 +157,8 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         countDownTimer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
     }
     
-
-    //MARK: -😍 Score and countDownTimer
     
+    //MARK: -😍 Score and countDownTimer
     
     @objc func updateTimer() {
         if seconds < 1 {
@@ -165,15 +168,12 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
             let passFailMessage = ScoreController.sharedInstance.calculateScore()
             countDownTimer.invalidate()
             self.view.showToast(toastMessage: passFailMessage, duration: 7.0)
-           
-             scoreAnswer = passFailMessage
-        //    print("😕😕😕😕😕😕😕😕😕😕😕")
             
-         // Im getting back both of theses I just need to add my score to the corresponding cell
+            scoreAnswer = passFailMessage
+            //    print("😕😕😕😕😕😕😕😕😕😕😕")
+            
+            // Im getting back both of theses I just need to add my score to the corresponding cell
             let record = self.recordings.last
-          
-            
-            
             
             record?.score = scoreAnswer
             print(record?.score as Any)
@@ -218,7 +218,7 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         }
         
         speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: lang))
-   
+        
     }
     //MARK: - AVAUDIOSESSION - Set up .setCategory record
     
@@ -257,20 +257,20 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
             
             if result != nil {
                 
-             //MARK: - STT spit out from library
-             
+                //MARK: - STT spit out from library
+                
                 self.STT = (result?.bestTranscription.formattedString)!
                 
                 print("😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛")
                 
                 // get the last record from the model and attach it
                 
-              //>   let record = self.recordings.last
+                //>   let record = self.recordings.last
                 
                 //attach record to sst to the last record but they come off in a set of strings
-            //>    record?.sst = self.STT
+                //>    record?.sst = self.STT
                 
-            
+                
                 //trying to add to the same record
                 
                 
@@ -279,8 +279,8 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
                 
                 
                 isFinal = (result?.isFinal)!
-                 // print out tet from tet to speach SPIT OUT POINT
-   
+                // print out tet from tet to speach SPIT OUT POINT
+                
             }
             
             if error != nil || isFinal {
@@ -318,7 +318,7 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         }
     }
     
-  
+    
     //MARK: - Stop The Gauge Button
     @IBAction func stopGaugeButtonTapped(_ sender: Any) {
         stopGauge()
@@ -349,24 +349,24 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     //MARK: - STT action intitiates
     
     @IBAction func TTSTapped(_ sender: Any) {
-    
+        
         speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: lang))
         
         if audioEngine.isRunning {
             audioEngine.stop()
             recognitionRequest?.endAudio()
             StartStopButton.isEnabled = false
-           // StartStopButton.setTitle("Start Recording", for: .normal)
+            // StartStopButton.setTitle("Start Recording", for: .normal)
         } else {
             startRecording()
-           // StartStopButton.setTitle("Stop Recording", for: .normal)
+            // StartStopButton.setTitle("Stop Recording", for: .normal)
         }
-  
+        
     }
     
     //MARK: - RECORDING START SETUP THE SESSION - RECORDING INDIVIDUAL RECORDS
     @IBAction func recordButtonTapped(_ sender: Any) {
-       
+        
         if audioRecorder == nil {
             
             // create a new fileName each time record is tapped
@@ -388,14 +388,14 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
                 audioRecorder.prepareToRecord()
                 audioRecorder.record()
                 audioRecorder.updateMeters()
-            
+                
                 
                 //MARK: - AVERAGE POWER FOR CHANNEL
                 let dB = audioRecorder.averagePower(forChannel: 0)
                 //let result = pow(10.0, db / 20.0) * 120.0
                 
                 decibels1 = Float(Double(round(10 * Double(dB+100))/10))
-              //  print(decibels1)
+                //  print(decibels1)
                 buttonLabel.setTitle("Stop", for: .normal)
                 
             } catch {
@@ -404,14 +404,41 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
                 
             }
         } else {
-          
-            audioRecorder.stop()
-           
             
-            //MARK: - RECORD MODEL ADD TO
+            audioRecorder.stop()
+            
+            
+            //MARK: - 😫 RECORD MODEL ADD TO
             print("😫😫😫😫😫😫😫😫😫😫😫😫😫")
-          
+            
+            // saving to regular Model
             let record = Recordings(recordings: numberOfRecords, decibels: (decibels1), sst: self.textViewST.text, score: scoreAnswer)
+            
+            // let record = Recordings()
+            
+            // saving to Core data model
+            let entry = Entry(entity: Entry.entity(), insertInto: context)
+            
+            entry.score = record.score
+            entry.recordings = record.recordings
+            entry.decibels = record.decibels
+            entry.sst = record.sst
+            appDelegate.saveContext()
+            
+            entries.append(entry)
+            
+            
+            //            @IBAction func addFriend() {
+            //                let data = FriendData()   // isntantiate new FriendData() isntance so that you don't edit an exsiting entry
+            //                let friend = Friend(entity: Friend.entity(), insertInto: context)
+            //                friend.name = data.name
+            //                friend.address = data.address  //<< adding a new entry // connecting model to the entity CD
+            //                appDelegate.saveContext()
+            //                friends.append(friend)
+            //                let index = IndexPath(row:friends.count - 1, section:0)
+            //                collectionView?.insertItems(at: [index])
+            //            }
+            //
             
             
             recordings.append(record)
@@ -434,13 +461,15 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recordings.count
+        return entries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as? RecordingsTableViewCell
         cell?.delegate = self
-        let record = recordings[indexPath.row]
+        
+        
+        let record = entries[indexPath.row] //<< changed Sot to coredata SOT
         
         cell?.recordingsLandingPad = record
         

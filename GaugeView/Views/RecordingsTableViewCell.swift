@@ -18,7 +18,7 @@ class RecordingsTableViewCell: UITableViewCell {
     var delegate: RecordingsTableViewCellDelegate?
     
     //MARK: - Cell Landing Pad
-    var recordingsLandingPad: Recordings? {
+    var recordingsLandingPad: Entry? {  // < changed to SOT landing pad
         didSet {
             updateViews()
         }
