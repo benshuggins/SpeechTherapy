@@ -18,6 +18,8 @@ extension Entry {
     }
 
     @NSManaged public var sst: String?
+    @NSManaged public var score: String?
     @NSManaged public var decibels: Float
+    @NSManaged public var recordings: Double
 
 }

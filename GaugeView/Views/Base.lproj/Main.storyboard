@@ -85,9 +85,6 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JiB-6k-jQ1">
                                                 <rect key="frame" x="188" y="0.0" width="93" height="25"/>
-                                                <connections>
-                                                    <action selector="startStopTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rc7-7j-gce"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHr-cb-YBw">
                                                 <rect key="frame" x="282" y="0.0" width="93" height="25"/>
