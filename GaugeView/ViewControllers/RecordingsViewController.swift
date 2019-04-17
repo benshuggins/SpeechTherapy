@@ -15,7 +15,7 @@ import CoreData
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-@IBDesignable
+//@IBDesignable
 class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var recordTableView: UITableView!
@@ -82,13 +82,13 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     static let sharedInstance = RecordingsViewController()
     
     @IBInspectable
-    let test = GaugeView(frame: CGRect(x: 35, y: 44, width: 350, height: 350))
+    let test = GaugeView(frame: CGRect(x: 44, y: 44, width: 280, height: 280))
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        test.backgroundColor = .gray
+       // test.backgroundColor = .red
         
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .black
         //MARK: - TextToSpeech segment control
         
         StartStopButton.isEnabled = false  //2
@@ -138,6 +138,9 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+       // recordTableView.estimatedRowHeight = 70
+        recordTableView.rowHeight = UITableView.automaticDimension
+        
         do {
             entries = try context.fetch(Entry.fetchRequest()) // SOT core data
         } catch let error as NSError {
@@ -306,7 +309,7 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
             print("audioEngine couldn't start because of an error.")
         }
         
-        textViewST.text = "Press record and say a phrase to test your volume matching skills!"
+        textViewST.text = "Record a phrase!"
         
     }
     
@@ -427,20 +430,7 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
             
             entries.append(entry)
             
-            
-            //            @IBAction func addFriend() {
-            //                let data = FriendData()   // isntantiate new FriendData() isntance so that you don't edit an exsiting entry
-            //                let friend = Friend(entity: Friend.entity(), insertInto: context)
-            //                friend.name = data.name
-            //                friend.address = data.address  //<< adding a new entry // connecting model to the entity CD
-            //                appDelegate.saveContext()
-            //                friends.append(friend)
-            //                let index = IndexPath(row:friends.count - 1, section:0)
-            //                collectionView?.insertItems(at: [index])
-            //            }
-            //
-            
-            
+         
             recordings.append(record)
             recordTableView.reloadData()
             audioRecorder = nil
@@ -453,12 +443,37 @@ class RecordingsViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            context.delete(entries[indexPath.row] as NSManagedObject)
+            do {
+                context.delete(entries[indexPath.row] as NSManagedObject)
+           // self.recordings.remove(at: indexPath.row)
+            self.entries.remove(at: indexPath.row)
             
-            self.recordings.remove(at: indexPath.row)
-            
+           
+            appDelegate.saveContext()
             tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
+           
+            } catch {
+                print("Could not save. \(error), \(String(describing: error._userInfo))")
+            }
         }
     }
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            managedObjectContext.delete(sessions[indexPath.row])
+//            do {
+//                try managedObjectContext.save()
+//                tableView.reloadData()
+//            } catch let error as NSError {
+//                print("Could not save. \(error), \(error.userInfo)")
+//            }
+//        }
+//    }
+//
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return entries.count

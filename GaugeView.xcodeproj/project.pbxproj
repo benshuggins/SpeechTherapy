@@ -15,7 +15,7 @@
 		CE1F142F225EBC090066A877 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F142E225EBC080066A877 /* UIView+Extension.swift */; };
 		CE5CC24922667B6E00EF6F30 /* Entry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CC24722667B6E00EF6F30 /* Entry+CoreDataClass.swift */; };
 		CE5CC24F22668EFE00EF6F30 /* GaugeView.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE5CC24D22668EFE00EF6F30 /* GaugeView.xcdatamodeld */; };
-		CE5CC25322668F9400EF6F30 /* Entry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CC25222668F9400EF6F30 /* Entry+CoreDataProperties.swift */; };
+		CE5CC259226793C300EF6F30 /* Entry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CC257226793C300EF6F30 /* Entry+CoreDataProperties.swift */; };
 		CEAA23BF2252C09900FBB8D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA23BE2252C09900FBB8D6 /* AppDelegate.swift */; };
 		CEAA23C12252C09900FBB8D6 /* RecordingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA23C02252C09900FBB8D6 /* RecordingsViewController.swift */; };
 		CEAA23C42252C09900FBB8D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEAA23C22252C09900FBB8D6 /* Main.storyboard */; };
@@ -33,7 +33,7 @@
 		CE1F142E225EBC080066A877 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CE5CC24722667B6E00EF6F30 /* Entry+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entry+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CE5CC24E22668EFE00EF6F30 /* GaugeView.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GaugeView.xcdatamodel; sourceTree = "<group>"; };
-		CE5CC25222668F9400EF6F30 /* Entry+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entry+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CE5CC257226793C300EF6F30 /* Entry+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entry+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CEAA23BB2252C09900FBB8D6 /* GaugeView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GaugeView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAA23BE2252C09900FBB8D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEAA23C02252C09900FBB8D6 /* RecordingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsViewController.swift; sourceTree = "<group>"; };
@@ -61,8 +61,8 @@
 				CE1F1426225E5EE60066A877 /* Scoring.swift */,
 				CE1F13E0225967190066A877 /* Recordings.swift */,
 				CE5CC24722667B6E00EF6F30 /* Entry+CoreDataClass.swift */,
-				CE5CC25222668F9400EF6F30 /* Entry+CoreDataProperties.swift */,
 				CE5CC24D22668EFE00EF6F30 /* GaugeView.xcdatamodeld */,
+				CE5CC257226793C300EF6F30 /* Entry+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -226,8 +226,8 @@
 				CE1F1429225E6A660066A877 /* ScoreController.swift in Sources */,
 				CE5CC24922667B6E00EF6F30 /* Entry+CoreDataClass.swift in Sources */,
 				CEAA23D12252C2C000FBB8D6 /* GaugeView.swift in Sources */,
+				CE5CC259226793C300EF6F30 /* Entry+CoreDataProperties.swift in Sources */,
 				CE1F142F225EBC090066A877 /* UIView+Extension.swift in Sources */,
-				CE5CC25322668F9400EF6F30 /* Entry+CoreDataProperties.swift in Sources */,
 				CEAA23BF2252C09900FBB8D6 /* AppDelegate.swift in Sources */,
 				CE1F13E7225972F10066A877 /* RecordingsTableViewCell.swift in Sources */,
 				CE1F142B225E6FAA0066A877 /* RecordingController.swift in Sources */,
