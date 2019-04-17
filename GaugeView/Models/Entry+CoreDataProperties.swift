@@ -2,7 +2,7 @@
 //  Entry+CoreDataProperties.swift
 //  GaugeView
 //
-//  Created by Ben Huggins on 4/16/19.
+//  Created by Ben Huggins on 4/17/19.
 //  Copyright © 2019 User. All rights reserved.
 //
 //
@@ -17,9 +17,9 @@ extension Entry {
         return NSFetchRequest<Entry>(entityName: "Entry")
     }
 
-    @NSManaged public var sst: String?
-    @NSManaged public var score: String?
     @NSManaged public var decibels: Float
     @NSManaged public var recordings: Double
+    @NSManaged public var score: String?
+    @NSManaged public var sst: String?
 
 }

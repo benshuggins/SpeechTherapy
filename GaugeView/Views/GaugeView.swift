@@ -197,7 +197,7 @@ class GaugeView: UIView {
     
     //MARK: - tick variables
     @IBInspectable
-    var majorTickColor = UIColor.black
+    var majorTickColor = UIColor.red
     var majorTickWidth: CGFloat = 2
     var majorTickLength: CGFloat = 35
     
@@ -276,10 +276,10 @@ class GaugeView: UIView {
         
         // finally, move in some more and draw the inside of our gauge
         let insideRect = innerBezelRect.insetBy(dx: innerBezelWidth, dy: innerBezelWidth)
+        
         insideColor.set()
         ctx.fillEllipse(in: insideRect)
     }
-    
     
     
     //MARK: - Draw Segments

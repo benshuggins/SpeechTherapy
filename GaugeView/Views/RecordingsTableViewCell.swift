@@ -29,6 +29,7 @@ class RecordingsTableViewCell: UITableViewCell {
     @IBOutlet weak var speechTextLabel: UILabel!
     @IBOutlet weak var playRecordingButtonLabel: UIButton!
     @IBOutlet weak var startExerciseButtonLabel: UIButton!
+    
     @IBOutlet weak var recordingNameLabel: UILabel!
     @IBOutlet weak var dBLabel: UILabel!
     
@@ -79,7 +80,7 @@ class RecordingsTableViewCell: UITableViewCell {
         guard let record = recordingsLandingPad else {return}
         recordingNameLabel.text = "Recording: \(record.recordings)"
         
-        dBLabel.text = "dB: \(record.decibels + updatedValue) dB"
+        dBLabel.text = "\(record.decibels + updatedValue) dB"
         
         speechTextLabel.text = record.sst
         passFailLabel.text = record.score
